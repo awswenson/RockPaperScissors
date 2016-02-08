@@ -18,4 +18,6 @@
 
     <!--TA End-->
 
+    <string name="button_play_text">Play</string>
+
 </resources>
