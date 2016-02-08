@@ -153,6 +153,10 @@ public class PlayFragment extends Fragment {
     }
 
     private String decideWinner(String player1Choice, String player2Choice) {
+        if (player1Choice == null || player2Choice == null) {
+            return "ERROR";
+        }
+
         if (player1Choice.equals(getResources().getString(R.string.rock))) { // Player one chose rock
             if (player2Choice.equals(getResources().getString(R.string.rock))) {
                 return "tie";
@@ -191,8 +195,6 @@ public class PlayFragment extends Fragment {
 
     private void displayWinner(String winner){
 
-        //TODO finish implementing this AlertDialog
-
         //do a prompt about the winner
         new AlertDialog.Builder(getActivity())
                 .setCancelable(true)
@@ -201,13 +203,23 @@ public class PlayFragment extends Fragment {
                 .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO start a rematch!
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_fragment_container, PlayFragment.newInstance(null, null))
+                                .addToBackStack(null)
+                                .commit();
                     }
                 })
                 .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO back out the the start screen
+                        getActivity().finish();
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        getActivity().finish();
                     }
                 })
                 .show();
