@@ -105,12 +105,15 @@ public class PlayFragment extends Fragment {
             public void onClick(View v) {
 
                 if(player1Choice == null) {
-                   //TODO player 1 chose Rock
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment_container, PlayFragment.newInstance(getResources().getString(R.string.rock), null))
+                            .addToBackStack(null)
+                            .commit();
                 }
                 else{
-                    //TODO player 2 chose Rock
+                    displayWinner(decideWinner(player1Choice, getResources().getString(R.string.rock)));
                 }
-
             }
         });
 
@@ -119,12 +122,14 @@ public class PlayFragment extends Fragment {
             public void onClick(View v) {
 
                 if(player1Choice == null) {
-                    //TODO
-
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment_container, PlayFragment.newInstance(getResources().getString(R.string.paper), null))
+                            .addToBackStack(null)
+                            .commit();
                 }
                 else{
-                    //TODO
-
+                    displayWinner(decideWinner(player1Choice, getResources().getString(R.string.paper)));
                 }
             }
         });
@@ -134,15 +139,53 @@ public class PlayFragment extends Fragment {
             public void onClick(View v) {
 
                 if(player1Choice == null) {
-                    //TODO
-
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment_container, PlayFragment.newInstance(getResources().getString(R.string.scissors), null))
+                            .addToBackStack(null)
+                            .commit();
                 }
                 else{
-                    //TODO
-
+                    displayWinner(decideWinner(player1Choice, getResources().getString(R.string.scissors)));
                 }
             }
         });
+    }
+
+    private String decideWinner(String player1Choice, String player2Choice) {
+        if (player1Choice.equals(getResources().getString(R.string.rock))) { // Player one chose rock
+            if (player2Choice.equals(getResources().getString(R.string.rock))) {
+                return "tie";
+            }
+            else if (player2Choice.equals(getResources().getString(R.string.paper))) {
+                return ARG_PLAYER_TWO;
+            }
+            else {
+                return ARG_PLAYER_ONE;
+            }
+        }
+        else if (player1Choice.equals(getResources().getString(R.string.paper))) { // Player one chose paper
+            if (player2Choice.equals(getResources().getString(R.string.rock))) {
+                return ARG_PLAYER_ONE;
+            }
+            else if (player2Choice.equals(getResources().getString(R.string.paper))) {
+                return "tie";
+            }
+            else {
+                return ARG_PLAYER_TWO;
+            }
+        }
+        else { // Player one chose scissors
+            if (player2Choice.equals(getResources().getString(R.string.rock))) {
+                return ARG_PLAYER_TWO;
+            }
+            else if (player2Choice.equals(getResources().getString(R.string.paper))) {
+                return ARG_PLAYER_ONE;
+            }
+            else {
+                return "tie";
+            }
+        }
     }
 
 
