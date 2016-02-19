@@ -3,13 +3,11 @@ package com.cs407_android.rockpaperscissors;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
-import com.xgc1986.ripplebutton.widget.RippleButton;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,9 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState != null) {
-            return;
-        }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         btnPlay = (Button)findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
