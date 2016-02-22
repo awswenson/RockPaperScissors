@@ -1,9 +1,7 @@
 package com.cs407_android.rockpaperscissors;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -71,8 +69,7 @@ public class PlayFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         //TA Implementation DON'T CHANGE
-        View view = null;
-        view = inflater.inflate(R.layout.fragment_play, container, false);
+        View view = inflater.inflate(R.layout.fragment_play, container, false);
 
         //instantiate widgets
         rockButton = (Button) view.findViewById(R.id.rock);
@@ -225,6 +222,5 @@ public class PlayFragment extends Fragment {
                 .show();
 
     }
-
 
 }
